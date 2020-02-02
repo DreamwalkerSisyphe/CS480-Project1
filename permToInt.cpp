@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -13,7 +14,8 @@ vector<int> suffixRank(vector<int> perm) {
          if (perm[j] > perm[k])
              count++;
        srank.push_back(count);
-       // cout << srank[j] << endl;
+       // recomment out 
+       cout << srank[j] << endl;
    }
   return srank;
 }
@@ -66,6 +68,39 @@ vector<int> intToPerm(int n, int m) {
   return temp1;
 }
 
+bool BFS(start){
+  if goal(start)
+	   return true;
+  queue<int> q;
+  insert(Q,start);
+  for (int i = 0; /*u in V */; i++){
+    visited[u] == false;
+  }
+  visited[u] == true;
+  while  (!q.empty()){
+    currrent = delete(q);
+    if goal(current)
+	     return true;
+  }
+  for (int i = 0; /*u in neigbor(current)*/; i++){
+    if(!visited[u]){
+      visited[u] == true;
+      parent[u] == current;
+      insert(q,u);
+    }
+  }
+  return false;
+  
+}
+
+IDS(start){
+  if goal(start)
+	   return true;
+  i = 1;
+  while !(DFS(start,i))
+    i++
+}
+
 int main() {
    vector<int> perm;
     int num;
@@ -91,8 +126,3 @@ int main() {
   cout << temp1[siz-1] << " > " << endl;
   return 0;
 }
-
-
-
-
-  
