@@ -1,4 +1,15 @@
+#include<iostream>
+#include <list>
+
+using namespace std;
+
 struct node
+{
+  node* left;
+  node* right;
+  int height;
+  struct node *next
+};
 
 bool sorted(vector<int> perm) 
 {
