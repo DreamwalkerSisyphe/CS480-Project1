@@ -76,7 +76,7 @@ bool goalState(vector<int> perm){
     return true;
 }
 
-vector<vector<int>> getNeighbors(vector<int> node, int parent){
+vector<vector<int>> getNeighbors(vector<int> node, vector<int> &parent){
     vector<vector<int>> neighbors;
     size = node.size();
     while(size > 2){
@@ -84,7 +84,7 @@ vector<vector<int>> getNeighbors(vector<int> node, int parent){
             vector<int> temp(node);
             for(int j = 0, int k = j + size-1; j < k; j++, k--)
                 swap(temp[i+j], temp[i+k]);
-            if(permToint(temp) != parent)
+            if(permToint(temp) != parent[permToint(node)])
                 neighbors.push_back(temp);
         }
         size--;
