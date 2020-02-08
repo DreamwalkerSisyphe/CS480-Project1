@@ -1,6 +1,6 @@
-
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 vector<int> suffixRank(vector<int> perm) {
@@ -66,33 +66,28 @@ vector<int> intToPerm(int n, int m) {
   return temp1;
 }
 
-int main() {
-   vector<int> perm;
-    int num;
-    cout << "Testing permToInt function " << endl;
-    cout << "Enter a permutation of < 1 2 ... n > for some n withspaces in between them." << endl;
-    cout << " Once done enter a 0 to signal the end of array.\n"
-         << "Enter input here: ";
-    while(cin >> num && num != 0)
-        perm.push_back(num);
-  int out = permToInt(perm);
-  cout << "The  permutation maps to integer  " << out << endl;
-  cout << "--------------------------------------------------------" << endl;
-  cout << "Testing intToPerm function " << endl;
-  cout << "Enter a positive integer, the lexical rank of the permutation " << endl;
-  int temp; cin >> temp;
-  cout << "Enter the size of the permutation " << endl;
-  int m; cin >> m;
-  cout << "The permutation map of " << temp << " is : " << endl;
-  vector<int> temp1 = intToPerm(temp, m);
-  int siz = temp1.size(); cout <<  "< " ;
-  for (int j = 0; j < siz-1; j++)
-     cout << temp1[j] << "," ;
-  cout << temp1[siz-1] << " > " << endl;
-  return 0;
+bool goalState(vector<int> perm){
+    int temp = perm[0];
+    for(int i = 1; i < perm.size(); i++){
+        if(perm[i] < temp)
+            return false;
+        temp = perm[i];
+    }
+    return true;
 }
 
-
-
-
-  
+vector<vector<int>> getNeighbors(vector<int> node, vector<int> &parent){
+    vector<vector<int>> neighbors;
+    size = node.size();
+    while(size > 2){
+        for(int i = 0; (i + size-1) < node.size(); i++){
+            vector<int> temp(node);
+            for(int j = 0, int k = j + size-1; j < k; j++, k--)
+                swap(temp[i+j], temp[i+k]);
+            if(permToint(temp) != parent[permToint(node)])
+                neighbors.push_back(temp);
+        }
+        size--;
+    }
+    return neighbors;
+}
