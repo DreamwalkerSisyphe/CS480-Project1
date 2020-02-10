@@ -1,19 +1,17 @@
 #include <iostream>
 #include <vector>
-#include <list>
+#include <queue>
 #include <algorithm>
 #include "helpers.cpp"
 
-bool BFS(vector<int> permutation, int &max_size){
-  if(goalState(permutation))
-    return true;
+int BFS(vector<int> perm, int &max_size, vector<bool> &visited, vector<int> &parent){
+  int index = permToInt(perm);
+  visited.resize(index+1, false);
+  parent.resize(index+1, -1);
+  if(goalState(perm))
+    return permToInt(perm);
   queue<vector<int>> Q;
-  vector<bool> visited;
-  vector<int> parent;
-  fill(visited.begin(), visited.end(), false);
-  fill(parent.begin(), parent.end(),-1);
   Q.push(perm);
-  int index = permToInt(permutation);
   visited[index] = true;
   vector<int> current;
   while(!Q.empty()){
@@ -23,10 +21,14 @@ bool BFS(vector<int> permutation, int &max_size){
     Q.pop();
     int parentIndex = permToInt(current);
     if(goalState(current))
-      return true;
+      return permToInt(current);
     vector<vector<int>> neighbors = getNeighbors(current, parent);
     for(vector<int> n: neighbors) {
       index = permToInt(n);
+      if((index+1) > visited.size())
+        visited.resize(index+1, false);
+      if((index+1) > parent.size())
+        parent.resize(index+1, -1);
       if(!visited[index]){
         visited[index] = true;
         parent[index] = parentIndex;

@@ -1,3 +1,6 @@
+#ifndef _HELPERS_
+#define _HELPERS_
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -67,8 +70,8 @@ vector<int> intToPerm(int n, int m) {
 }
 
 bool goalState(vector<int> perm){
-    int temp = perm[0];
-    for(int i = 1; i < perm.size(); i++){
+    int temp = 0;
+    for(int i = 0; i < perm.size(); i++){
         if(perm[i] < temp)
             return false;
         temp = perm[i];
@@ -78,16 +81,18 @@ bool goalState(vector<int> perm){
 
 vector<vector<int>> getNeighbors(vector<int> node, vector<int> &parent){
     vector<vector<int>> neighbors;
-    size = node.size();
-    while(size > 2){
+    int size = 3;
+    while(size <= node.size()){
         for(int i = 0; (i + size-1) < node.size(); i++){
             vector<int> temp(node);
-            for(int j = 0, int k = j + size-1; j < k; j++, k--)
+            for(int j = 0, k = j + size-1; j < k; j++, k--)
                 swap(temp[i+j], temp[i+k]);
-            if(permToint(temp) != parent[permToint(node)])
+            if(permToInt(temp) != parent[permToInt(node)])
                 neighbors.push_back(temp);
         }
-        size--;
+        size++;
     }
     return neighbors;
 }
+
+#endif
