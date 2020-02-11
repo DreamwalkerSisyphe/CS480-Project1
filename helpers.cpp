@@ -81,7 +81,7 @@ bool goalState(vector<int> perm){
 
 vector<vector<int>> getNeighbors(vector<int> node, vector<int> &parent){
     vector<vector<int>> neighbors;
-    int size = 3;
+    int size = 2;
     while(size <= node.size()){
         for(int i = 0; (i + size-1) < node.size(); i++){
             vector<int> temp(node);

@@ -1,12 +1,15 @@
 #include <vector>
+#include <iostream>
 #include <algorithm>
 #include "helpers.cpp"
 
-int DFS(vector<int> start, int i, vector<bool> &visited, vector<int> &parent){
-    if(goalState(start))
-	    return permToInt(start);
-    if(i == 0)
-        return -1;
+bool DFS(vector<int> start, int i, vector<bool> &visited, vector<int> &parent){
+    if(goalState(start)){
+        return true;
+    }
+    if(i <= 0){
+        return false;
+    }
     int parentIndex = permToInt(start);
     vector<vector<int>> neighbors = getNeighbors(start, parent);
     for(vector<int> n: neighbors){
@@ -19,14 +22,22 @@ int DFS(vector<int> start, int i, vector<bool> &visited, vector<int> &parent){
             visited[index] = true;
             parent[index] = parentIndex;
         }
-        return DFS(n, i-1, visited, parent);
+        if(DFS(n, i-1, visited, parent))
+            return true;
     }
+    return false;
 }
 
-int IDS(vector<int> start, vector<bool> &visited, vector<int> &parent){
-  if (goalState(start))
-	return permToInt(start);
-  int i = 1;
-  while (DFS(start, i, visited, parent) == -1)
-    i++;
+bool IDS(vector<int> start, vector<bool> &visited, vector<int> &parent){
+    int index = permToInt(start);
+    visited.resize(index+1, false);
+    parent.resize(index+1, -1);
+    if (goalState(start)){
+	    return true;
+    }
+    int i = 1;
+    while (!DFS(start, i, visited, parent)){
+        i++;
+    }
+    return true;
 }

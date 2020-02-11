@@ -42,7 +42,8 @@ int main()
     cout << "Performing IDS:" << endl;
     vector<bool> visitedIDS;
     vector<int> parentIDS;
-    node = IDS(perm, visitedBST, parentBST);
+    node = 0;
+    IDS(perm, visitedIDS, parentIDS);
     cout << "Number of Nodes Expanded: " << count(visitedIDS.begin(), visitedIDS.end(), true) << endl;
     vector<int> routeIDS;
     while(node != -1){
