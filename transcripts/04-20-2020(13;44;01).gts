@@ -1,0 +1,1 @@
+contract bookbounty was placed on someonecontract bombtmafia had a book full of namescontract boxtThe contracts in the book were never able to be made

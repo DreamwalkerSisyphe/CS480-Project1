@@ -1,0 +1,1 @@
+initiate stomacheating volcanic acidirritate stomachtgetting the stomach fluitch stomach{he became too ill and died
